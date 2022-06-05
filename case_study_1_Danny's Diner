@@ -36,3 +36,12 @@ JOIN dannys_diner.menu m
 ON s.product_id = m.product_id
 GROUP BY m.product_id, m.product_name
 ORDER BY COUNT(s.order_date) DESC;
+
+-- 5. Which item was the most popular for each customer?
+
+SELECT s.customer_id, COUNT(s.order_date), m.product_name
+FROM dannys_diner.sales s
+JOIN dannys_diner.menu m
+ON s.product_id = m.product_id
+GROUP BY s.customer_id, m.product_name
+ORDER BY COUNT(s.order_date) DESC;
