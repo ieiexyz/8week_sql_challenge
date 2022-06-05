@@ -21,12 +21,12 @@ ORDER BY customer_id;
 
 -- 3. What was the first item from the menu purchased by each customer?
 
-SELECT s.order_date, s.customer_id, m.product_name
+SELECT min(s.order_date), s.customer_id, m.product_name
 FROM dannys_diner.sales s
 JOIN dannys_diner.menu m
 ON s.product_id = m.product_id
 GROUP BY s.order_date, s.customer_id, m.product_name
-ORDER BY s.order_date;
+ORDER BY min(s.order_date), s.customer_id;
 
 -- 4. What is the most purchased item on the menu and how many times was it purchased by all customers?
 
