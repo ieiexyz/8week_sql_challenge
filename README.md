@@ -1,3 +1,3 @@
 # 8week_sql_challenge
-Practice different case study using sql
+<p>Practice different case study using SQL</p>
 Case resource : https://8weeksqlchallenge.com/getting-started/
