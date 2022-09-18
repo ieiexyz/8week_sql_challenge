@@ -54,3 +54,35 @@ JOIN dannys_diner.menu m ON m.product_id = s.product_id
 WHERE s.order_date >= b.join_date
 GROUP BY s.order_date, s.customer_id, m.product_name
 ORDER BY s.order_date;
+
+-- 7. Which item was purchased just before the customer became a member?
+
+SELECT
+  	m.customer_id,
+    s.order_date,
+    m.join_date,
+    me.product_name
+    
+FROM dannys_diner.sales as s
+JOIN dannys_diner.members as m
+ON s.customer_id = m.customer_id
+JOIN dannys_diner.menu me 
+ON me.product_id = s.product_id
+WHERE s.order_date < m.join_date
+ORDER BY customer_id, order_date DESC;
+
+-- 8.What is the total items and amount spent for each member before they became a member?
+
+SELECT 
+
+	s.customer_id,
+	COUNT(DISTINCT(s.product_id)) as menu_item,
+    SUM(me.price) as total_sales
+
+FROM dannys_diner.sales as s
+JOIN dannys_diner.members as m
+ON s.customer_id = m.customer_id
+JOIN dannys_diner.menu me 
+ON me.product_id = s.product_id
+WHERE s.order_date < m.join_date
+GROUP BY s.customer_id;
